@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Results</h1>
+    <h2>Dogs : <%= dogcount %> </h2>
+    <h2>Cats: <%= catcount     %> </h2>
+    <% if(dogcount>catcount){ %>
+    <h3>Dog won!</h3>
+    <% } %>
+    <% if(dogcount<catcount){ %>
+    <h3>Cat won!</h3>
+    <% } %>
+
+    <% if(dogcount==catcount){%>
+    <h3>Tie!</h3>
+    <% } %>
+
+</body>
+
+</html>
