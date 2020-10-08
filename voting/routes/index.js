@@ -11,7 +11,11 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:true}));
 
 //redis
-const client=require("../redis.js");
+const redisoption = {
+    host: '0.0.0.0',
+    port: 6379
+};
+const client = redis.createClient(redisoption);
 
 //method override
 router.use(methodOverride("_method"));

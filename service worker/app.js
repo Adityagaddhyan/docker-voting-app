@@ -9,8 +9,11 @@ const app = express();
 
 
 //connecting to redis
-const redisPORT = 6379;
-const client = redis.createClient(redisPORT);
+const redisoption = {
+    host: '0.0.0.0',
+    port: 6379
+};
+const client = redis.createClient(redisoption);
 
 //mongoose schema
 const voteSchema = new mongoose.Schema({
