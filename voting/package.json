@@ -1,0 +1,29 @@
+{
+  "name": "voting",
+  "version": "1.0.0",
+  "description": "this is the app to vote in",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "docker",
+    "vote",
+    "voting",
+    "redis"
+  ],
+  "author": "Aditya Gaddhyan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "method-override": "^3.0.0",
+    "redis": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

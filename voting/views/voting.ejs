@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poll your vote</title>
+</head>
+<body>
+    <% if(animal) %>
+    <h2>You voted for <%= animal %>  </h2>
+    <form action="/vote/cats" method="post">
+        <button type="submit">Cats</button>
+    </form>
+    <form action="/vote/dogs" method="post">
+        <button type="submit">Dogs</button>
+    </form>
+</body>
+</html>
