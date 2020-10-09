@@ -6,7 +6,7 @@ const PORT = 3011;
 
 
 //mongoose connection
-mongoose.connect('mongodb://0.0.0.0:27017/voterapp', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://mongodb:27017/voterapp', { useNewUrlParser: true, useUnifiedTopology: true });
 
 //mongoose schema
 const voteSchema = new mongoose.Schema({
@@ -15,7 +15,6 @@ const voteSchema = new mongoose.Schema({
 });
 //moomgoose model
 const Vote = mongoose.model("vote", voteSchema);
-
 
 
 app.get("/", (req, res, next) => {

@@ -3,17 +3,17 @@ const redis = require("redis");
 const mongoose = require("mongoose");
 
 //mongoose connection
-mongoose.connect('mongodb://localhost:27017/voterapp', { useNewUrlParser: true });
+mongoose.connect('mongodb://mongodb:27017/voterapp', { useNewUrlParser: true, useUnifiedTopology: true   });
 
 const app = express();
 
 
 //connecting to redis
 const redisoption = {
-    host: '0.0.0.0',
+    host: redis,
     port: 6379
 };
-const client = redis.createClient(redisoption);
+const client = redis.createClient("6379");
 
 //mongoose schema
 const voteSchema = new mongoose.Schema({

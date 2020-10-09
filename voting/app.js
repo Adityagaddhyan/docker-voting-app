@@ -25,7 +25,7 @@ app.use(session({
 const PORT = process.env.PORT || 3000;
 //redis
 const redisoption = {
-    host: '0.0.0.0',
+    host: redis,
     port: 6379
 };
 const client = redis.createClient(redisoption);

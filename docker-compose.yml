@@ -3,59 +3,68 @@ services:
     
     
     vote:
-        image: adityagaddhyan/voting-app
+        build:
+            context: ./voting
+            dockerfile: Dockerfile
+        container_name: voting-app
         ports: 
             - "3000:3000"
         depends_on:
             - redis
-        networks:
-            - front-end
-            - back-end
         volumes: 
-            - ./vote:/app
+            - voteData:/app
+        restart: unless-stopped
     result:
-        image: adityagaddhyan/voting-result
+        build: 
+            context: ./result
+            dockerfile: Dockerfile
+        container_name: result-app
         ports: 
             - "3011:3011"
         depends_on:
             - mongodb
-        networks: 
-            - back-end
-            - front-end
         volumes: 
-            - ./result:/app
-
+            - voteData:/app
+        restart: unless-stopped
+        
+        
     worker:
-        image: adityagaddhyan/service-worker
+        build:  
+            context: ./service worker
+            dockerfile: Dockerfile
+        container_name: worker
         depends_on: 
             - redis
             - mongodb
-        networks: 
-            - back-end
         volumes: 
-            - ./worker:/app
+            - voteData:/app
+        restart: unless-stopped
+        
     redis:
         image : redis
-        command: ["redis-server", "--bind", "0.0.0.0", "--port", "6379","&&","sudo", "systemctl", "restart", "redis"]
+        command: ["redis-server", "--bind", "0.0.0.0", "--port", "6379"]
         ports: 
             - "6379:6379"
-        networks: 
-            - back-end
         volumes: 
-            - ./redis:/app
+            - voteData:/app
+        restart: unless-stopped
+        
     mongodb:
         image: mongo
-        ports:
+        command: ["mongod", "--bind", "0.0.0.0", "--port", "27017"]
+        ports: 
             - "27017:27017"
         volumes: 
-            - ./db:/app
+            - voteData:/app
+        restart: unless-stopped
+
+
+        
+    volumes: 
+        voteData:
+
     
-volumes:
-    db-data:
     
-networks:
-    front-end:
-    back-end:
 
         
 
