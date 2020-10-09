@@ -23,12 +23,11 @@ app.use(session({
   }));
 //port
 const PORT = process.env.PORT || 3000;
-//redis
-const redisoption = {
-    host: "redis",
+//connecting to redis
+const client = redis.createClient({
+    host: 'localhost',
     port: 6379
-};
-const client = redis.createClient(redisoption);
+});
 client.on("error", function(error) {
     console.error(error);
 });

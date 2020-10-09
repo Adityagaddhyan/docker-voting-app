@@ -14,9 +14,7 @@ const voteSchema = new mongoose.Schema({
     voted: String
 });
 //moomgoose model
-const Vote = mongoose.model("vote", voteSchema);
-
-
+const Vote = mongoose.model("vote", voteSchema);    
 app.get("/", (req, res, next) => {
     res.redirect("/result");
 });

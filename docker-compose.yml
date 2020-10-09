@@ -1,71 +1,23 @@
 version: "3"
 services:
-    
-    
-    vote:
-        build:
-            context: ./voting
-            dockerfile: Dockerfile
-        container_name: voting-app
-        ports: 
-            - "3000:3000"
-        depends_on:
-            - redis
-        volumes: 
-            - voteData:/app
-        restart: unless-stopped
-    result:
-        build: 
-            context: ./result
-            dockerfile: Dockerfile
-        container_name: result-app
-        ports: 
-            - "3011:3011"
-        depends_on:
-            - mongodb
-        volumes: 
-            - voteData:/app
-        restart: unless-stopped
-        
-        
-    worker:
-        build:  
-            context: ./service worker
-            dockerfile: Dockerfile
-        container_name: worker
-        depends_on: 
-            - redis
-            - mongodb
-        volumes: 
-            - voteData:/app
-        restart: unless-stopped
-        
     redis:
-        image : redis
-        command: ["redis-server", "--bind", "0.0.0.0", "--port", "6379"]
-        ports: 
-            - "6379:6379"
-        volumes: 
-            - voteData:/app
-        restart: unless-stopped
-        
-    mongodb:
+        image: redis
+    mongo:
         image: mongo
-        command: ["mongod", "--bind", "0.0.0.0", "--port", "27017"]
-        ports: 
-            - "27017:27017"
-        volumes: 
-            - voteData:/app
-        restart: unless-stopped
-
-
-        
-    volumes: 
-        voteData:
-
-    
-    
-
-        
-
-            
+    vote:
+        build: ./voting/
+        ports:
+            - "4000:3000"
+        links:
+            - redis
+    result:
+        build: ./result
+        ports:
+            - "3011:3011"
+        links:
+            - mongo
+    worker:
+        build: ./service worker
+        links:
+            - redis
+            - mongo

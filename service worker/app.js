@@ -28,21 +28,24 @@ function intervalFunc(){
     client.hgetall("vote", (err, val) => {
     if (err)
         console.log(err);
-    else {
-        for (const [key, value] of Object.entries(val)) {
-            Vote.findOne({ voter_id: key }, (err, result) => {
-                console.log(key,value);
-                if (err)
-                    return console.log(err);
-                if (!result) {
-                    Vote.create({ voter_id: key, voted: value });
-                }
-                else if (result) {
-                    Vote.findByIdAndUpdate({ voter_id: key }, { $set: { voted: value } });
-                }
-            })
-        }
+    else if(!val){
+        console.log("redis empty");
     }
+    // else {
+    //     for (const [key, value] of Object.entries(val)) {
+    //         Vote.findOne({ voter_id: key }, (err, result) => {
+    //             console.log(key,value);
+    //             if (err)
+    //                 return console.log(err);
+    //             if (!result) {
+    //                 Vote.create({ voter_id: key, voted: value });
+    //             }
+    //             else if (result) {
+    //                 Vote.findByIdAndUpdate({ voter_id: key }, { $set: { voted: value } });
+    //             }
+    //         })
+    //     }
+    // }
 })
 }
 
