@@ -25,13 +25,13 @@ app.use(session({
 const PORT = process.env.PORT || 3000;
 //redis
 const redisoption = {
-    host: redis,
+    host: "redis",
     port: 6379
 };
 const client = redis.createClient(redisoption);
 client.on("error", function(error) {
     console.error(error);
-  });
+});
 
 
 //view engine
